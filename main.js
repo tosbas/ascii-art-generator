@@ -6,13 +6,24 @@ img.src = "ut-2004.png";
 
 const charList = "@#%*+=-:. ";
 
+// Multiplier for spacing of characters
+const multX = 6;  // Defines the horizontal spacing multiplier between ASCII characters.
+const multY = 8;  // Defines the vertical spacing multiplier between ASCII characters.
+
+// Scale
+const scale = 0.4;  // Defines the scaling factor for the image.
+
+// Font Size
+const fontSize = 10;  // Defines the font size used to display the ASCII characters on the canvas.
+
+
 img.onload = function () {
-    const scale = 0.50;
+ 
     const asciiW = Math.floor(img.width * scale);
     const asciiH = Math.floor(img.height * scale);
 
-    canvas.width = asciiW * 6;
-    canvas.height = asciiH * 8; 
+    canvas.width = asciiW * multX;
+    canvas.height = asciiH * multY; 
 
     ctx.drawImage(img, 0, 0, asciiW, asciiH);
     const imageData = ctx.getImageData(0, 0, asciiW, asciiH).data;
@@ -20,8 +31,8 @@ img.onload = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    ctx.font = "10px monospace";
+   
+    ctx.font = `${fontSize}px monospace`;
 
     for (let y = 0; y < asciiH; y++) {
         for (let x = 0; x < asciiW; x++) {
@@ -30,11 +41,13 @@ img.onload = function () {
             let g = imageData[index + 1];
             let b = imageData[index + 2];
 
-            let brightness = (r + g + b) / 3;
+            // YIQ formula for better contrast https://en.wikipedia.org/wiki/YIQ
+            let brightness = r * 0.299 + g * 0.587 + b * 0.114;
             let charIndex = Math.floor((brightness / 255) * (charList.length - 1));
 
             let char = charList[charList.length - 1 - charIndex];
-            ctx.fillText(char, x * 6, y * 8);
+            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+            ctx.fillText(char, x * multX, y * multY);
         }
  
     }
