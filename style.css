@@ -1,10 +1,43 @@
 body{
     margin: 0;
     background-color: black;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+    color: #fff;
 }
 
 canvas{
     display: block;
     margin: auto;
     border: 1px solid red;
+    overflow: auto;
+}
+
+.controls{
+    color: white;
+}
+
+#file-input{
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+#downloader{
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: block;
+    width: 200px;
+    text-align: center;
+    margin: auto;
+    text-decoration: none;
 }
