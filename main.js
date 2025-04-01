@@ -37,7 +37,6 @@ fileInput.addEventListener("change", (e) => {
 });
 
 img.onload = function () {
-    process = true;
     renderImage();
 };
 
