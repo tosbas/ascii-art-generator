@@ -6,7 +6,7 @@ const fileInput = document.getElementById("file-input");
 
 const scaleSlider = document.getElementById("scaleSlider");
 const multSlider = document.getElementById("multSlider");
-const fontSizeSlider =document.getElementById("fontSizeSlider");
+const fontSizeSlider = document.getElementById("fontSizeSlider");
 
 const img = new Image();
 img.src = "ut-2004.png";
@@ -19,13 +19,21 @@ let scale = scaleSlider.value;
 
 let fontSize = 10;
 
+const authorized_types = ["image/jpeg", "image/png"];
+
 fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (e) => {
-        img.src = e.target.result;
-    };
+    if (authorized_types.includes(file.type)){
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+            img.src = e.target.result;
+        };
+    }else{
+        alert(`Unauthorized type: ${file.type}. Only the following types are allowed: ${authorized_types.join(", ")}`);
+        fileInput.value = "";
+    }
+    
 });
 
 img.onload = function () {
@@ -39,12 +47,12 @@ function handleScale(e) {
 }
 
 function handleMult(e) {
-    mult = parseFloat(e.target.value); 
+    mult = parseFloat(e.target.value);
     renderImage();
 }
 
-function handleFontSize(e){
-    fontSize = parseFloat(e.target.value); 
+function handleFontSize(e) {
+    fontSize = parseFloat(e.target.value);
     renderImage();
 }
 
@@ -84,7 +92,7 @@ function renderImage() {
 
 }
 
-fontSizeSlider.addEventListener("change", (e)=> handleFontSize(e));
+fontSizeSlider.addEventListener("change", (e) => handleFontSize(e));
 scaleSlider.addEventListener("change", (e) => handleScale(e));
 multSlider.addEventListener("change", (e) => handleMult(e));
 downloader.addEventListener("click", (e) => download(e));
