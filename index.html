@@ -7,17 +7,13 @@
     <title>Ascii Art Generator</title>
   </head>
   <body>
-
     <h1>Ascii Art Generator</h1>
-    <div class="controls">
-      Scale :<input id="scaleSlider" name="scaleSlider" type="range" min="0.1" max="1" step="0.1" value="0.5"/>
-      Mult :<input id="multSlider" name="multSlider" type="range" min="1" max="10" step="0.1" value="5"/>
-      FontSize: <input id="fontSizeSlider" name="fontSizeSlider" type="range" min="1" max="30" step="0.1" value="10"/>
-    </div>
-    <input type="file" id="file-input"/>
+
+    <input type="file" id="file-input" />
     <canvas id="canvas"></canvas>
-    <div >
-      <a href="#" id="downloader" download="image.png">Download!</a>
+
+    <h2>Output</h2>
+    <textarea id="output-text"></textarea>
 
     <script src="main.js"></script>
   </body>
